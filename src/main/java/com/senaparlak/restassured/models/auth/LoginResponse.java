@@ -17,7 +17,6 @@ public class LoginResponse {
     private String firstName;
     private String lastName;
     private String gender;
-    private String birthDate;
     private String image;
     private String accessToken;
     private String refreshToken;
