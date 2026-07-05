@@ -45,4 +45,12 @@ public class ProductsService {
                 .when()
                 .put(ProductRoutes.UPDATE_PRODUCT);
     }
+
+    public static Response deleteProduct(int id){
+        return given()
+                .spec(RequestSpecs.getRequestSpec())
+                .pathParam("id", id)
+                .when()
+                .delete(ProductRoutes.DELETE_PRODUCT);
+    }
 }

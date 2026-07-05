@@ -1,6 +1,7 @@
 package com.senaparlak.restassured.models.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,5 +29,11 @@ public class Product {
     private String sku;
     private int weight;
     private Dimensions dimensions;
+
+    @JsonProperty("isDeleted")
+    private boolean deleted;
+
+    @JsonProperty("deletedOn")
+    private String deletedOn;
 
 }

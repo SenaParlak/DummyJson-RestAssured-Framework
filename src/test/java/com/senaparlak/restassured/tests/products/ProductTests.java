@@ -1,10 +1,7 @@
 package com.senaparlak.restassured.tests.products;
 
 import com.senaparlak.restassured.models.common.ErrorResponse;
-import com.senaparlak.restassured.models.product.CreateProductRequest;
-import com.senaparlak.restassured.models.product.Product;
-import com.senaparlak.restassured.models.product.ProductsResponse;
-import com.senaparlak.restassured.models.product.UpdateProductRequest;
+import com.senaparlak.restassured.models.product.*;
 import com.senaparlak.restassured.services.ProductsService;
 import com.senaparlak.restassured.specifications.ResponseSpecs;
 import com.senaparlak.restassured.utils.ResponseMapper;
@@ -86,5 +83,19 @@ public class ProductTests {
         assertEquals(product.getDescription(), request.getDescription());
         assertEquals(product.getPrice(), request.getPrice(), 0.01);
 
+    }
+
+    @Test
+    public void deleteProduct() {
+
+        Response response = ProductsService.deleteProduct(1);
+
+        response.then().spec(ResponseSpecs.successResponse());
+
+        Product product = ResponseMapper.parse(response, Product.class);
+
+        assertEquals(product.getId(), 1);
+        assertTrue(product.isDeleted());
+        assertNotNull(product.getDeletedOn());
     }
 }
