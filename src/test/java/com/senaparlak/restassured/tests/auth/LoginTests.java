@@ -4,6 +4,7 @@ import com.senaparlak.restassured.models.auth.ErrorResponse;
 import com.senaparlak.restassured.models.auth.LoginResponse;
 import com.senaparlak.restassured.services.AuthService;
 import com.senaparlak.restassured.specifications.ResponseSpecs;
+import com.senaparlak.restassured.utils.ResponseMapper;
 import data.LoginData;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -21,7 +22,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.successResponse());
 
-        LoginResponse loginResponse = response.as(LoginResponse.class);
+        LoginResponse loginResponse = ResponseMapper.parse(response, LoginResponse.class);
 
         assertEquals(loginResponse.getUsername(), "emilys");
         assertNotNull(loginResponse.getAccessToken());
@@ -37,7 +38,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.badRequestResponse());
 
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Invalid credentials");
     }
@@ -50,7 +51,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.badRequestResponse());
 
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Invalid credentials");
     }
@@ -63,7 +64,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.badRequestResponse());
 
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Username and password required");
 
@@ -77,7 +78,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.badRequestResponse());
 
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Username and password required");
 
@@ -91,7 +92,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.badRequestResponse());
 
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Username and password required");
     }
@@ -104,7 +105,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.badRequestResponse());
 
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Username and password required");
     }
@@ -117,7 +118,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.badRequestResponse());
 
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Username and password required");
     }
@@ -130,7 +131,7 @@ public class LoginTests {
         response.then()
                 .spec(ResponseSpecs.badRequestResponse());
 
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Username and password required");
     }
