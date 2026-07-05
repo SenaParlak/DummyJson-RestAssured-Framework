@@ -98,4 +98,18 @@ public class ProductTests {
         assertTrue(product.isDeleted());
         assertNotNull(product.getDeletedOn());
     }
+
+    @Test
+    public void updateInvalidProduct() {
+
+        UpdateProductRequest request = ProductData.validUpdateProduct();
+
+        Response response = ProductsService.updateProduct(9999, request);
+
+        response.then().spec(ResponseSpecs.notFoundResponse());
+
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
+
+        assertEquals(errorResponse.getMessage(), "Product with id '9999' not found");
+    }
 }
