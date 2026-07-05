@@ -1,5 +1,6 @@
 package com.senaparlak.restassured.tests.products;
 
+import com.senaparlak.restassured.models.common.ErrorResponse;
 import com.senaparlak.restassured.models.product.Product;
 import com.senaparlak.restassured.models.product.ProductsResponse;
 import com.senaparlak.restassured.services.ProductsService;
@@ -37,5 +38,18 @@ public class ProductTests {
         assertEquals(product.getId(), 1);
         assertNotNull(product.getTitle());
         assertTrue(product.getPrice() > 0);
+    }
+
+    @Test
+    public void getProductByInvalidId(){
+
+        Response response = ProductsService.getProductById(9999);
+
+        response.then().spec(ResponseSpecs.notFoundResponse());
+
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
+
+        assertEquals(errorResponse.getMessage(), "Product with id '9999' not found");
+
     }
 }

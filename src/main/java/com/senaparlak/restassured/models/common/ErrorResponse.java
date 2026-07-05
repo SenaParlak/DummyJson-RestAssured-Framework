@@ -1,4 +1,4 @@
-package com.senaparlak.restassured.models.auth;
+package com.senaparlak.restassured.models.common;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

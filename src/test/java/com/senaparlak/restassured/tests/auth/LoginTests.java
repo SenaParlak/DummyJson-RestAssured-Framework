@@ -1,6 +1,6 @@
 package com.senaparlak.restassured.tests.auth;
 
-import com.senaparlak.restassured.models.auth.ErrorResponse;
+import com.senaparlak.restassured.models.common.ErrorResponse;
 import com.senaparlak.restassured.models.auth.LoginResponse;
 import com.senaparlak.restassured.services.AuthService;
 import com.senaparlak.restassured.specifications.ResponseSpecs;

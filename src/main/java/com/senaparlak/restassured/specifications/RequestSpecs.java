@@ -16,5 +16,6 @@ public class RequestSpecs {
                 .setBaseUri(ConfigReader.getProperty("baseUrl"))
                 .setContentType(ContentType.JSON)
                 .build();
+
     }
 }
