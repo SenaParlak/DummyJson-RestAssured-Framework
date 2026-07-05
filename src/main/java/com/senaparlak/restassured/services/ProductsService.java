@@ -1,6 +1,8 @@
 package com.senaparlak.restassured.services;
 
 import com.senaparlak.restassured.endpoints.ProductRoutes;
+import com.senaparlak.restassured.models.product.CreateProductRequest;
+import com.senaparlak.restassured.models.product.Product;
 import com.senaparlak.restassured.specifications.RequestSpecs;
 import io.restassured.response.Response;
 
@@ -25,5 +27,12 @@ public class ProductsService {
                 .pathParam("id", id)
                 .when()
                 .get(ProductRoutes.PRODUCT);
+    }
+
+    public static Response createProduct(CreateProductRequest request){
+        return given()
+                .spec(RequestSpecs.getRequestSpec())
+                .when()
+                .post(ProductRoutes.ADD_PRODUCT);
     }
 }

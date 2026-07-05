@@ -1,11 +1,13 @@
 package com.senaparlak.restassured.tests.products;
 
 import com.senaparlak.restassured.models.common.ErrorResponse;
+import com.senaparlak.restassured.models.product.CreateProductRequest;
 import com.senaparlak.restassured.models.product.Product;
 import com.senaparlak.restassured.models.product.ProductsResponse;
 import com.senaparlak.restassured.services.ProductsService;
 import com.senaparlak.restassured.specifications.ResponseSpecs;
 import com.senaparlak.restassured.utils.ResponseMapper;
+import data.ProductData;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -50,6 +52,21 @@ public class ProductTests {
         ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Product with id '9999' not found");
+
+    }
+
+    @Test
+    public void addProduct() {
+
+        CreateProductRequest request = ProductData.validProduct();
+
+        Response response = ProductsService.createProduct(request);
+
+        response.then().spec(ResponseSpecs.createdResponse());
+
+        Product product = ResponseMapper.parse(response, Product.class);
+
+        assertTrue(product.getId() > 0);
 
     }
 }

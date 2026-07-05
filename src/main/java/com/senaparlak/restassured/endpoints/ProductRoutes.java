@@ -8,4 +8,6 @@ public class ProductRoutes {
     public static final String PRODUCTS = "/products";
 
     public static final String PRODUCT = "/products/{id}";
+
+    public static final String ADD_PRODUCT = "/products/add";
 }
