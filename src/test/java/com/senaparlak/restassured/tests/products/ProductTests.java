@@ -4,6 +4,7 @@ import com.senaparlak.restassured.models.common.ErrorResponse;
 import com.senaparlak.restassured.models.product.CreateProductRequest;
 import com.senaparlak.restassured.models.product.Product;
 import com.senaparlak.restassured.models.product.ProductsResponse;
+import com.senaparlak.restassured.models.product.UpdateProductRequest;
 import com.senaparlak.restassured.services.ProductsService;
 import com.senaparlak.restassured.specifications.ResponseSpecs;
 import com.senaparlak.restassured.utils.ResponseMapper;
@@ -67,6 +68,23 @@ public class ProductTests {
         Product product = ResponseMapper.parse(response, Product.class);
 
         assertTrue(product.getId() > 0);
+
+    }
+
+    @Test
+    public void updateProduct() {
+
+        UpdateProductRequest request = ProductData.validUpdateProduct();
+
+        Response response = ProductsService.updateProduct(1, request);
+
+        response.then().spec(ResponseSpecs.successResponse());
+
+        Product product = ResponseMapper.parse(response, Product.class);
+
+        assertEquals(product.getTitle(), request.getTitle());
+        assertEquals(product.getDescription(), request.getDescription());
+        assertEquals(product.getPrice(), request.getPrice(), 0.01);
 
     }
 }
