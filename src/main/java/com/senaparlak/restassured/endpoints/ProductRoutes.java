@@ -6,4 +6,6 @@ public class ProductRoutes {
     }
 
     public static final String PRODUCTS = "/products";
+
+    public static final String PRODUCT = "/products/{id}";
 }

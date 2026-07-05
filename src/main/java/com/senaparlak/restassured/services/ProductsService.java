@@ -18,4 +18,12 @@ public class ProductsService {
                 .when()
                 .get(ProductRoutes.PRODUCTS);
     }
+
+    public static Response getProductById(int id){
+        return given()
+                .spec(RequestSpecs.getRequestSpec())
+                .pathParam("id", id)
+                .when()
+                .get(ProductRoutes.PRODUCT);
+    }
 }

@@ -1,5 +1,6 @@
 package com.senaparlak.restassured.tests.products;
 
+import com.senaparlak.restassured.models.product.Product;
 import com.senaparlak.restassured.models.product.ProductsResponse;
 import com.senaparlak.restassured.services.ProductsService;
 import com.senaparlak.restassured.specifications.ResponseSpecs;
@@ -7,7 +8,7 @@ import com.senaparlak.restassured.utils.ResponseMapper;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.*;
 
 public class ProductTests {
 
@@ -22,6 +23,19 @@ public class ProductTests {
 
         assertFalse(productsResponse.getProducts().isEmpty());
 
+    }
 
+    @Test
+    public void getProductById(){
+
+        Response response = ProductsService.getProductById(1);
+
+        response.then().spec(ResponseSpecs.successResponse());
+
+        Product product = ResponseMapper.parse(response, Product.class);
+
+        assertEquals(product.getId(), 1);
+        assertNotNull(product.getTitle());
+        assertTrue(product.getPrice() > 0);
     }
 }
