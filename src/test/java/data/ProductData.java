@@ -2,10 +2,7 @@ package data;
 
 import com.senaparlak.restassured.models.product.CreateProductRequest;
 import com.senaparlak.restassured.models.product.UpdateProductRequest;
-import com.senaparlak.restassured.utils.FakerUtils;
 import net.datafaker.Faker;
-
-import java.util.UUID;
 
 public class ProductData {
 
