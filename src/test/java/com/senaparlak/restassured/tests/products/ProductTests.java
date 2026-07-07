@@ -112,4 +112,16 @@ public class ProductTests {
 
         assertEquals(errorResponse.getMessage(), "Product with id '9999' not found");
     }
+
+    @Test
+    public void deleteInvalidProduct(){
+
+        Response response = ProductsService.deleteProduct(9999);
+
+        response.then().spec(ResponseSpecs.notFoundResponse());
+
+        ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
+
+        assertEquals(errorResponse.getMessage(), "Product with id '9999' not found");
+    }
 }
