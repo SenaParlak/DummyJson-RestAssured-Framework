@@ -2,6 +2,7 @@ package data;
 
 import com.senaparlak.restassured.models.product.CreateProductRequest;
 import com.senaparlak.restassured.models.product.UpdateProductRequest;
+import com.senaparlak.restassured.utils.FakerUtils;
 import net.datafaker.Faker;
 
 import java.util.UUID;
@@ -11,28 +12,32 @@ public class ProductData {
     private ProductData(){
 
     }
+    public class FakerUtils {
+
+        private FakerUtils(){}
+
+        public static final Faker FAKER = new Faker();
+    }
 
     private static final Faker faker = new Faker();
 
     public static CreateProductRequest validProduct() {
 
-        CreateProductRequest request = new CreateProductRequest();
+        return CreateProductRequest.builder()
+        .title(faker.commerce().productName())
+        .description(faker.lorem().sentence())
+        .category(faker.commerce().department())
+        .price(faker.number().randomDouble(3, 54, 2000))
+        .build();
 
-        request.setTitle(faker.commerce().productName());
-        request.setDescription(faker.lorem().sentence());
-        request.setCategory(faker.commerce().department());
-        request.setPrice(faker.number().randomDouble(3, 54, 2000));
-
-        return request;
     }
 
     public static UpdateProductRequest validUpdateProduct(){
 
-        UpdateProductRequest request = new UpdateProductRequest();
-        request.setTitle("Updated Product");
-        request.setDescription("Automation Test Product");
-        request.setPrice(400);
-
-        return request;
+        return UpdateProductRequest.builder()
+                .title("Updated " + FakerUtils.FAKER.commerce().productName())
+                .description(FakerUtils.FAKER.lorem().sentence())
+                .price(FakerUtils.FAKER.number().numberBetween(200, 3000))
+                .build();
     }
 }

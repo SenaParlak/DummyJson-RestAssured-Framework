@@ -1,9 +1,6 @@
 package com.senaparlak.restassured.models.product;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -11,6 +8,8 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @ToString
+@AllArgsConstructor
+@Builder
 public class UpdateProductRequest {
 
     private String title;
