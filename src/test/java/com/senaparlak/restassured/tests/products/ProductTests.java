@@ -8,6 +8,7 @@ import com.senaparlak.restassured.utils.ResponseMapper;
 import data.ProductData;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
+import providers.ProductDataProvider;
 
 import static org.testng.AssertJUnit.*;
 
@@ -27,7 +28,7 @@ public class ProductTests {
     }
 
     @Test
-    public void getProductById(){
+    public void shouldGetProductById(){
 
         Response response = ProductsService.getProductById(1);
 
@@ -41,7 +42,7 @@ public class ProductTests {
     }
 
     @Test
-    public void getProductByInvalidId(){
+    public void shouldNotGetProductByInvalidId(){
 
         Response response = ProductsService.getProductById(9999);
 
@@ -54,7 +55,7 @@ public class ProductTests {
     }
 
     @Test
-    public void addProduct() {
+    public void shouldCreateProductSuccessfully() {
 
         CreateProductRequest request = ProductData.validProduct();
 
@@ -69,7 +70,7 @@ public class ProductTests {
     }
 
     @Test
-    public void updateProduct() {
+    public void shouldUpdateProductSuccessfully() {
 
         UpdateProductRequest request = ProductData.validUpdateProduct();
 
@@ -86,7 +87,7 @@ public class ProductTests {
     }
 
     @Test
-    public void deleteProduct() {
+    public void shouldDeleteProductSuccessfully() {
 
         Response response = ProductsService.deleteProduct(1);
 
@@ -100,7 +101,7 @@ public class ProductTests {
     }
 
     @Test
-    public void updateInvalidProduct() {
+    public void shouldNotUpdateInvalidProduct() {
 
         UpdateProductRequest request = ProductData.validUpdateProduct();
 
@@ -114,7 +115,7 @@ public class ProductTests {
     }
 
     @Test
-    public void deleteInvalidProduct(){
+    public void shouldNotDeleteInvalidProduct(){
 
         Response response = ProductsService.deleteProduct(9999);
 
@@ -123,5 +124,16 @@ public class ProductTests {
         ErrorResponse errorResponse = ResponseMapper.parse(response, ErrorResponse.class);
 
         assertEquals(errorResponse.getMessage(), "Product with id '9999' not found");
+    }
+
+    @Test(dataProvider = "productIds", dataProviderClass = ProductDataProvider.class)
+    public void shouldGetProductByIds(int productId){
+
+        Response response = ProductsService.getProductById(productId);
+
+        Product product = ResponseMapper.parse(response, Product.class);
+
+        assertEquals(product.getId(), productId);
+
     }
 }
