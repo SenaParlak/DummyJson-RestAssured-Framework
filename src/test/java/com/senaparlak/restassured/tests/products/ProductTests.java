@@ -6,6 +6,9 @@ import com.senaparlak.restassured.services.ProductsService;
 import com.senaparlak.restassured.specifications.ResponseSpecs;
 import com.senaparlak.restassured.utils.ResponseMapper;
 import data.ProductData;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import providers.ProductDataProvider;
@@ -53,7 +56,9 @@ public class ProductTests {
         assertEquals(errorResponse.getMessage(), "Product with id '9999' not found");
 
     }
-
+    @Epic("Products")
+    @Feature("Create Product")
+    @Story("Create Valid Product")
     @Test
     public void shouldCreateProductSuccessfully() {
 

@@ -1,6 +1,7 @@
 package com.senaparlak.restassured.specifications;
 
 import com.senaparlak.restassured.config.ConfigReader;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
@@ -15,6 +16,7 @@ public class RequestSpecs {
         return new RequestSpecBuilder()
                 .setBaseUri(ConfigReader.getProperty("baseUrl"))
                 .setContentType(ContentType.JSON)
+                .addFilter(new AllureRestAssured())
                 .build();
 
     }
