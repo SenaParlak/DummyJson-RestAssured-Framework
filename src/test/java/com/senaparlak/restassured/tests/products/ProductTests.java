@@ -15,7 +15,7 @@ import static org.testng.AssertJUnit.*;
 public class ProductTests {
 
     @Test
-    public void getProducts(){
+    public void shouldGetProducts(){
 
         Response response = ProductsService.getAllProducts();
 
